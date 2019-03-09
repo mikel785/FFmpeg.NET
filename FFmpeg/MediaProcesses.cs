@@ -54,7 +54,10 @@ namespace EmergenceGuardian.FFmpeg {
                 try {
                     if (!GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0))
                         return;
-                    process.WaitForExit();
+                    if (!process.WaitForExit(3000))
+                    {
+                        process.Kill();
+                    }
                 }
                 finally {
                     FreeConsole();
